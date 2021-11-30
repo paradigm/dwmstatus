@@ -282,7 +282,9 @@ int main(void)
 	}
 	Window root = XRootWindow(dpy, DefaultScreen(dpy));
 
-	if (set_status(dpy, root, "Loading...") < 0) {
+	char buf[BUFSIZE];
+	strcpy(buf, "Loading...");
+	if (set_status(dpy, root, buf) < 0) {
 		fprintf(stderr, "Could not set status.\n");
 		return -1;
 	}
@@ -315,7 +317,6 @@ int main(void)
 		force_trigger = 0;
 		poll_trigger = 0;
 
-		char buf[BUFSIZE];
 		cat_bufs(buf, sizeof(buf));
 		if (set_status(dpy, root, buf) < 0) {
 			fprintf(stderr, "Could not set status\n");
